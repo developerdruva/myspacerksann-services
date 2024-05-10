@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.get('/', (webReq, webRes) => {
+    console.log('welcome this is myspace rksann application running.')
     webRes.send({
         status: 'success',
         message: 'Server running successfully.'
