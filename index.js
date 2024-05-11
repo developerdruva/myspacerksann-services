@@ -19,7 +19,8 @@ app.use(express.json());
 app.use(cors({ origin: 'https://myspace-rajesh.netlify.app' }));
 
 app.get('/', (webReq, webRes) => {
-    console.log('welcome this is myspace rksann application running.')
+    console.log('welcome this is myspace rksann application running.');
+    console.log(process.env.AWS_POSTGRES_DATABASE)
     webRes.send({
         status: 'success',
         message: 'Server running successfully.'
