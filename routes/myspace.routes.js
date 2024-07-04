@@ -17,6 +17,6 @@ var getIPmiddleware = (req, res, next) => {
     }
 }
 
-router.get('/getmyspacePortfolioDetails', getIPmiddleware, myspacePortfolio?.getMyspacePortfolioDetails);
+router.get('/getmyspacePortfolioDetails', myspacePortfolio?.getMyspacePortfolioDetails);
 
 module.exports = router;
