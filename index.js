@@ -26,6 +26,12 @@ app.get('/', (webReq, webRes) => {
         message: 'Server running successfully.'
     })
 })
+app.get('/sampleroute', (webReq, webRes)=> {
+    webRes.send({
+        status: 'success',
+        message:'routes are working.'
+    })
+})
 app.use(MyspaceRoutes);
 app.use(SampleDataRoutes);
 app.use(UserAccountRoutes);
