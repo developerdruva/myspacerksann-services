@@ -16,7 +16,7 @@ exports.getMyspacePortfolioDetails = async (webReq, webRes) => {
         var studies = await POOL?.query('select * from portfolioblog.studies order by study_seq desc');
         var usedTechsOfPoc = await POOL?.query('select * from portfolioblog.used_techsofpoc');
         
-        console.log('persondetails ', personDetails?.rows);
+        // console.log('persondetails ', personDetails?.rows);
         if (personDetails?.rowCount > 0) {
             successMsgRetrieve['data'] = {
                 personDetails: personDetails?.rows,

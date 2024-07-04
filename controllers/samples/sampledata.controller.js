@@ -2,7 +2,7 @@ const POOL = require('../../db/sql/connection');
 const { successMsgRetrieve } = require('../../utils/commonSyntaxes');
 
 exports.getSampleRecord  = async (webReq, webRes) => {
-    successMsgRetrieve['data'] = 'Hi there how are you ?. welcome'
+    successMsgRetrieve['data'] = 'Hi there how are you ?.  '
     webRes?.send(successMsgRetrieve)
 }
 
