@@ -3,6 +3,7 @@ var router = express.Router();
 var requestIp = require('request-ip');
 
 var myspacePortfolio = require('../controllers/myspace.portfolio/myspace.portfolio.controller');
+var myspaceblog = require('../controllers/myspaceblog.mongo/myspaceblog.controller')
 // const { getIPmiddleware } = require('../middlewares/profilemiddlewares/requestip.user');
 
 var getIPmiddleware = (req, res, next) => {
@@ -18,5 +19,6 @@ var getIPmiddleware = (req, res, next) => {
 }
 
 router.get('/getmyspacePortfolioDetails', myspacePortfolio?.getMyspacePortfolioDetails);
+router.get('/getmyspaceblogdetails', myspaceblog?.getPersonalBlogDetails);
 
 module.exports = router;
