@@ -20,5 +20,6 @@ var getIPmiddleware = (req, res, next) => {
 
 router.get('/getmyspacePortfolioDetails', myspacePortfolio?.getMyspacePortfolioDetails);
 router.get('/getmyspaceblogdetails', myspaceblog?.getPersonalBlogDetails);
+router.post('/saveFeedbackDetails', myspaceblog.saveFeedbackDetails);
 
 module.exports = router;

@@ -9,9 +9,10 @@ const mystudiesModel = require('../../models/myspaceblog/mystudies.model');
 const usedTechsOfPocModel = require('../../models/myspaceblog/techOfPoc.model');
 // const mySkillsModel = require('../../models/myspaceblog/myskills.model');
 
-const { successMsgRetrieve } = require('../../utils/commonSyntaxes');
+const { successMsgRetrieve, successMsgInsert, errorMsgInsert } = require('../../utils/commonSyntaxes');
 const myskillsModel = require('../../models/myspaceblog/myskills.model');
 const skill_setkeysModel = require('../../models/myspaceblog/skill_setkeys.model');
+const feedbackModel = require('../../models/myspaceblog/feedback.model');
 // const skills_setModel = require('../../models/myspaceblog/skills_set.model');
 
 exports.getPersonalBlogDetails = async (req, res) => {
@@ -27,7 +28,6 @@ exports.getPersonalBlogDetails = async (req, res) => {
         let mystudies = await mystudiesModel.find();
         let mySkills = await myskillsModel.find();
         let skillsKeys = await skill_setkeysModel.find();
-        console.log('skills set  ', skillSet);
 
         successMsgRetrieve['data'] = {
             personDetails: personDetails,
@@ -45,5 +45,22 @@ exports.getPersonalBlogDetails = async (req, res) => {
         res?.send(successMsgRetrieve)
     } catch (e) {
         console.log(e)
+    }
+}
+
+exports.saveFeedbackDetails = async (req, res) => {
+    console.log(' inside save feed back details', req.body)
+    let feedbackInfo = req.body
+    let feedbackSave = new feedbackModel(feedbackInfo);
+    try {
+        let saveRes = await feedbackSave.save();
+        // console.log('save res ', saveRes)
+        if (saveRes._id) {
+            res.send(successMsgInsert)
+        } else {
+            res.send(errorMsgInsert)
+        }
+    } catch (error) {
+        console.log(error)
     }
 }
