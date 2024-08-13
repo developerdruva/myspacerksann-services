@@ -12,12 +12,12 @@ var workedCompanieSchema = new Schema({
         default: '-'
     },
     from_date: {
-        type: Date,
+        type: String,
         required: true,
         default: '-'
     },
     to_date: {
-        type: Date,
+        type: String,
         required: true,
         default: '-'
     },

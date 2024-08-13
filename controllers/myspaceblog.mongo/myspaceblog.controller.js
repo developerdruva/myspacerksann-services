@@ -16,6 +16,7 @@ const feedbackModel = require('../../models/myspaceblog/feedback.model');
 // const skills_setModel = require('../../models/myspaceblog/skills_set.model');
 
 exports.getPersonalBlogDetails = async (req, res) => {
+    console.log(' get personal blog details');
     try {
         let usedTechsOfPoc = await usedTechsOfPocModel.find();
         let personDetails = await personModel.find();
@@ -24,9 +25,9 @@ exports.getPersonalBlogDetails = async (req, res) => {
         let projectDetails = await workedProjectModel.find();
         let skillSet = await skillSetModel.find();
         let summeryEducation = await summeryEducationModel.find();
-        let workedCompanies = await workedCompaniesModel.find();
+        let workedCompanies = await workedCompaniesModel.find().sort({ orderCode: -1 });
         let mystudies = await mystudiesModel.find();
-        let mySkills = await myskillsModel.find();
+        let mySkills = await myskillsModel.find().sort({skill_seq: 1});
         let skillsKeys = await skill_setkeysModel.find();
 
         successMsgRetrieve['data'] = {
