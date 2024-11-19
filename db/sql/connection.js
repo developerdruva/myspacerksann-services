@@ -2,11 +2,11 @@ const { Pool } = require('pg');
 const pg = require('pg');
 
 let awsPostgres = {
-    user: process.env.AWS_POSTGRES_USER,
-    host: process.env.AWS_POSTGRES_HOST,
-    database: process.env.AWS_POSTGRES_DATABASE,
-    password: process.env.AWS_POSTGRES_PASSWORD,
-    port: process.env.AWS_POSTGRES_PORT,
+    user: process.env.NEON_POSTGRES_USER,
+    host: process.env.NEON_POSTGRES_HOST,
+    database: process.env.NEON_POSTGRES_DATABASE,
+    password: process.env.NEON_POSTGRES_PASSWORD,
+    port: process.env.NEON_POSTGRES_PORT,
     ssl: {
         rejectUnauthorized: false
     },

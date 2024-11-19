@@ -1,3 +1,3 @@
-const message = {
-    desc: 'hi there'
+module.exports = {
+    personDetailsPathS3 : 'personDetails/'
 }

@@ -9,11 +9,11 @@ exports.getMyspacePortfolioDetails = async (webReq, webRes) => {
         var certifications = await POOL?.query('select * from portfolioblog.certifications order by certify_seq asc');
         var pocProjects = await POOL?.query('select * from portfolioblog.poc_projects order by project_seq asc');
         var skillSet = await POOL?.query('select * from portfolioblog.skills_set');
-        var workedCompanies = await POOL?.query('select * from portfolioblog.worked_companies order by comp_sequence desc');
-        var workedProjects = await POOL?.query('select * from portfolioblog.worked_projects order by project_sequence desc');
-        var skillsKeys = await POOL?.query('select * from portfolioblog.skillset_keys order by key_sequence asc');
-        var mySkills = await POOL?.query('select * from portfolioblog.my_skills order by skill_seq asc');
-        var studies = await POOL?.query('select * from portfolioblog.studies order by study_seq desc');
+        var workedCompanies = await POOL?.query('select * from portfolioblog.worked_companies order by comp_seq desc');
+        var workedProjects = await POOL?.query('select * from portfolioblog.worked_projects ');
+        var skillsKeys = await POOL?.query('select * from portfolioblog.skillset_keys');
+        var mySkills = await POOL?.query('select * from portfolioblog.my_skills ');
+        var studies = await POOL?.query('select * from portfolioblog.studies ');
         var usedTechsOfPoc = await POOL?.query('select * from portfolioblog.used_techsofpoc');
         
         // console.log('persondetails ', personDetails?.rows);
@@ -36,4 +36,24 @@ exports.getMyspacePortfolioDetails = async (webReq, webRes) => {
     } catch (e) {
         console.log('catch ', e)
     }
+}
+
+exports.saveFeedbackform = async (webReq, webRes) => {
+    console.log(' console log ', webReq.body);
+    let queryStr = `insert into portfolioblog.feedback_form (likes, dislikes, description) values (${webReq.body.like},${webReq.body.unlike},'${webReq.body.feedbackDesc}')`
+    console.log(' query ', queryStr)
+    POOL.query(queryStr,
+        (err, result) => {
+            console.log('result', result);
+            console.log('err-', err);
+            if (err) {
+                webRes.send(err?.message);
+            } else {
+                webRes.send({
+                    status: 'success',
+                    message: 'feedback registered successfully.'
+                })
+            }
+        }
+    )
 }
