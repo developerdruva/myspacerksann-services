@@ -1,0 +1,39 @@
+{
+  "name": "myspacerksann-services-netlify",
+  "version": "1.0.0",
+  "description": "this is for myspace project for backend development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "build": "npm run-script build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/developerdruva/myspacerksann-services.git"
+  },
+  "author": "rajesh kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/developerdruva/myspacerksann-services/issues"
+  },
+  "homepage": "https://github.com/developerdruva/myspacerksann-services#readme",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.673.0",
+    "@netlify/functions": "^2.8.2",
+    "aws-sdk": "^2.1691.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.0",
+    "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
+    "nodemon": "^3.0.3",
+    "pg": "^8.11.3",
+    "request-ip": "^3.3.0",
+    "serverless-http": "^3.2.0"
+  }
+}
