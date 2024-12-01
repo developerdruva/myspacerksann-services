@@ -194,6 +194,57 @@ exports.saveProfileDetails = (req, res) => {
     }
 }
 
+
+exports.saveWorkedCompanies = (webReq, webRes) => {
+    const body = webReq?.body;
+    console.log('body of the webreq ', body);
+    // console.log('created ip ', webReq?.socket.remoteAddress)
+    body['created_ip'] = webReq?.socket.remoteAddress;
+    // let updateData = {}
+    const keysAllowed = [
+        'company_name',
+        'designation',
+        'from_date',
+        'to_date',
+        'email_id',
+        'numberof_projects',
+        'color_code',
+        'comp_seq',
+        'company_code',
+        'created_ip'
+    ]
+    // const updateSQLQuery = keysAllowed.reduce((preVal, currVal, index) => {
+    //     return preVal + `${currVal}='${body[currVal]}'` + (index != keysAllowed.length - 1 ? ',' : '')
+    // }, '')
+    // console.log('update querys => ', updateSQLQuery)
+    try {
+        let sqlQuery = `insert into portfolioblog.worked_companies (${keysAllowed}) values ($1, $2,$3,$4,$5,$6,$7,$8,$9,$10)`
+        console.log(' query', keysAllowed)
+        console.log(' query values ', Object.values(body))
+
+        POOL.query(
+            sqlQuery, 
+            Object.values(body),
+            (err, result) => {
+                console.log('result', result);
+                console.log('err-', err);
+                if (err) {
+                    webRes.send(err?.message);
+                } else {
+                    webRes.send({
+                        status: 'success',
+                        message: 'User registered successfully.'
+                    })
+                }
+            }
+        )
+    } catch (e) {
+        webRes.send(e);
+        console.log('e ', e)
+    }
+}
+
+
 {
     /**
      * 
