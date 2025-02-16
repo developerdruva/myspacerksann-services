@@ -10,7 +10,6 @@ router.post('/loginSimple', userAccountController.loginSimple);
 router.post('/saveprofiledetails',
     uploadToBucket.fields([{ name: 'profile_pic', maxCount: 1 }, { name: 'resume', maxCount: 1 }]), 
     userAccountController.saveProfileDetails);
-router.post('/saveWorkedCompanies', userAccountController?.saveWorkedCompanies);
 
 
 
