@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     origin: "https://myspace-rajesh.netlify.app",
-    credentials: true
+    // credentials: true
 }));
 
 app.get('/', (webReq, webRes) => {
