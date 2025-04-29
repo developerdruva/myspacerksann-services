@@ -8,7 +8,7 @@ router.post('/chatbotusercreate', userAccountController?.registerUser);
 router.post('/chatbotuserlogin', userAccountController?.loginUser);
 router.post('/loginSimple', userAccountController.loginSimple);
 router.post('/saveprofiledetails',
-    uploadToBucket.fields([{ name: 'profile_pic', maxCount: 1 }, { name: 'resume', maxCount: 1 }]), 
+    uploadToBucket.fields([{ name: 'profile_pic', maxCount: 1 }, { name: 'resume', maxCount: 1 }]),
     userAccountController.saveProfileDetails);
 
 
