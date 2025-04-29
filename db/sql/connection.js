@@ -1,6 +1,7 @@
 const { Pool } = require('pg');
 const pg = require('pg');
-const { dbConnServer } = require('../../utils/commonUtils');
+// const { dbConnServer } = require('../../utils/commonUtils');
+const dbConnServer = process.env.DB_SERVER;
 
 let DBCONN_DEV = {
     user: process.env.NEON_PG_USER,
