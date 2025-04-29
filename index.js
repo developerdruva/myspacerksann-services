@@ -16,7 +16,10 @@ const UserAccountRoutes = require('./routes/account.user.routes');
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "https://myspace-rajesh.netlify.app",
+    credentials: true
+}));
 
 app.get('/', (webReq, webRes) => {
     console.log('welcome this is myspace rksann application running.');
@@ -26,10 +29,10 @@ app.get('/', (webReq, webRes) => {
         message: 'Server running successfully.'
     })
 })
-app.get('/sampleroute', (webReq, webRes)=> {
+app.get('/sampleroute', (webReq, webRes) => {
     webRes.send({
         status: 'success',
-        message:'routes are working. this is sample route'
+        message: 'routes are working. this is sample route'
     })
 })
 app.use(MyspaceRoutes);
