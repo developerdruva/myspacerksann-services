@@ -1,4 +1,5 @@
 module.exports = {
-    personDetailsPathS3 : 'personDetails/',
-    dbConnServer : 'PROD'
+    personDetailsPathS3: 'personDetails/',
+    dbConnServer: 'PROD'
 }
+
