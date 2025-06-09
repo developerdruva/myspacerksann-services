@@ -25,7 +25,7 @@ app.get("/", (webReq, webRes) => {
   console.log(process.env.AWS_POSTGRES_DATABASE);
   webRes.send({
     status: "success",
-    message: "Server running successfully.",
+    message: "Server running successfully.---------------",
   });
 });
 app.get("/sampleroute", (webReq, webRes) => {
