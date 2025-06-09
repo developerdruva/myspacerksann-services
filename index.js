@@ -17,7 +17,7 @@ const corsOptions = require("./utils/corsOptions");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions)); // Enable pre-flight requests for all routes
 
 app.get("/", (webReq, webRes) => {
@@ -25,7 +25,7 @@ app.get("/", (webReq, webRes) => {
   console.log(process.env.AWS_POSTGRES_DATABASE);
   webRes.send({
     status: "success",
-    message: "Server running successfully.---------------",
+    message: "Server running successfully. Welcome to Myspace RKSANN!",
   });
 });
 app.get("/sampleroute", (webReq, webRes) => {
