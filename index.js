@@ -17,8 +17,8 @@ const corsOptions = require("./utils/corsOptions");
 const app = express();
 
 app.use(express.json());
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // Enable pre-flight requests for all routes
+app.use(cors());
+// app.options("*", cors(corsOptions)); // Enable pre-flight requests for all routes
 
 app.get("/", (webReq, webRes) => {
   console.log("welcome this is myspace rksann application running.");
