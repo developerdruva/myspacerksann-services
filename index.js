@@ -21,8 +21,8 @@ app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions)); // Enable pre-flight requests for all routes
 
 app.get("/", (webReq, webRes) => {
-  console.log("welcome this is myspace rksann application running.");
-  console.log(process.env.AWS_POSTGRES_DATABASE);
+  //   console.log("welcome this is myspace rksann application running.");
+  //   console.log(process.env.AWS_POSTGRES_DATABASE);
   webRes.send({
     status: "success",
     message: "Server running successfully. Welcome to Myspace RKSANN!",

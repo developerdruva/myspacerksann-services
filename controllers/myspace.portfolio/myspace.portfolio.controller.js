@@ -18,10 +18,10 @@ exports.getMyspacePortfolioDetails = async (webReq, webRes) => {
     );
     var skillSet = await POOL?.query("select * from portfolioblog.skills_set");
     var workedCompanies = await POOL?.query(
-      "select * from portfolioblog.worked_companies order by comp_seq desc"
+      "select * from portfolioblog.worked_companies where is_delete=false order by comp_seq desc"
     );
     var workedProjects = await POOL?.query(
-      "select * from portfolioblog.worked_projects "
+      "select * from portfolioblog.worked_projects  order by display_no desc"
     );
     var skillsKeys = await POOL?.query(
       "select * from portfolioblog.skillset_keys"

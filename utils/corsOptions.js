@@ -6,16 +6,15 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log("CORS origin:", origin); // Debug log
-    // Allow if origin is in allowed list or if it's undefined (like in Postman or curl)
-    if (!origin || allowedOrigins.includes(origin)) {
+    console.log("CORS origin:", origin);
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
   methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["*"], // Allow all headers for debugging
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
 
