@@ -32,11 +32,11 @@ let DBCONN_PROD = {
 
 let POOL;
 
-if (dbConnServer === "dev") {
+if (dbConnServer == "dev") {
   console.log("in db server dev");
   POOL = new Pool(DBCONN_DEV);
   console.log("in db server dev----", DBCONN_DEV);
-} else if (dbConnServer === "prod") {
+} else if (dbConnServer == "prod") {
   console.log("in db server prod");
   POOL = new Pool(DBCONN_PROD);
 }
