@@ -77,6 +77,7 @@ exports.loginUser = (req, res) => {
 }
 
 exports.loginSimple = (req, res) => {
+    console.log( 'req, ', req)
     let { emailId, password } = req?.body;
     POOL.query(
         'SELECT email_id FROM master_data.allowed_users',

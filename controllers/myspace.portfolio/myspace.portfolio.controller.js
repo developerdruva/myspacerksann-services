@@ -101,6 +101,7 @@ ORDER BY st.id ASC;`
 exports.saveFeedbackform = async (req, res) => {
   const { postId = "default", like, unlike, feedbackDesc } = req.body;
   const ip = getClientIp(req);
+  console.log("\n feedback data \n", req.body, ip)
 
   if (!like && !unlike) {
     return res.status(400).json({ message: "Like or unlike must be true" });

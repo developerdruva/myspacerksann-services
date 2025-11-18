@@ -9,7 +9,7 @@ const corsOptions = {
   origin: function (origin, callback) {
     console.log("CORS origin:", origin);
     // Allow requests with no origin (Postman/cURL) or from allowed origins
-    if (origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));

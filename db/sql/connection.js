@@ -22,7 +22,7 @@ let DBCONN_PROD = {
   database: process.env.PROD_NEON_PG_DATABASE,
   password: process.env.PROD_NEON_PG_PASSWORD,
   port: process.env.PROD_NEON_PG_PORT,
-  ssl: {
+  ssl: { 
     rejectUnauthorized: false,
   },
   dialectOptions: {

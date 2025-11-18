@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
-var userAccountController = require("../../../controllers/user.accounts/registration.controller");
+var userAccountController = require("../controllers/user.accounts/registration.controller");
 const {
   uploadS3bucketMiddleware,
-} = require("../personDetailsMiddlewares/persondetails.middleware");
+} = require("./middlewares/personDetailsMiddlewares/persondetails.middleware");
 const uploadToBucket = uploadS3bucketMiddleware();
 
 router.post("/chatbotusercreate", userAccountController?.registerUser);
