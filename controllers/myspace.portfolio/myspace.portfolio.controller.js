@@ -4,6 +4,7 @@ const { successMsgRetrieve } = require("../../utils/commonSyntaxes");
 
 exports.getMyspacePortfolioDetails = async (webReq, webRes) => {
   console.log(" hi in get myspace -----");
+  console.log(" hi in get myspace ----- new line for testing");
   try {
     var personDetails = await POOL?.query(
       "select * from portfolioblog.person_details"
