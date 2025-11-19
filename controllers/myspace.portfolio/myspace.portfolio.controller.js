@@ -6,6 +6,8 @@ exports.getMyspacePortfolioDetails = async (webReq, webRes) => {
   console.log(" hi in get myspace -----");
   console.log(" hi in get myspace ----- new line for test ");
   console.log(" hi in get myspace ----- new line for test 11");
+  console.log(" hi in get myspace ----- new line welcome 123");
+
   try {
     var personDetails = await POOL?.query(
       "select * from portfolioblog.person_details"
