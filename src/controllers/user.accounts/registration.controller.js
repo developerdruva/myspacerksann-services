@@ -8,7 +8,11 @@ const POOL = require('../../db/sql/connection');
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
+<<<<<<< HEAD
 >>>>>>> c3376cb (folder structure change)
+=======
+>>>>>>> 39c6849 (folder structure change)
+>>>>>>> 48d34ee (folder structure change)
 
 dotenv.config();
 
@@ -421,7 +425,11 @@ exports.saveProfileDetails = (req, res) => {
 
 {
     /**
+<<<<<<< HEAD
 >>>>>>> c3376cb (folder structure change)
+=======
+>>>>>>> 39c6849 (folder structure change)
+>>>>>>> 48d34ee (folder structure change)
      * 
      * first_name='${body?.first_name}',
                 last_name='${body?.last_name}',
@@ -438,4 +446,8 @@ exports.saveProfileDetails = (req, res) => {
 }
 =======
 }
+<<<<<<< HEAD
 >>>>>>> c3376cb (folder structure change)
+=======
+>>>>>>> 39c6849 (folder structure change)
+>>>>>>> 48d34ee (folder structure change)

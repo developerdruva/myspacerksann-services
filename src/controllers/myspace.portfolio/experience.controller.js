@@ -2,7 +2,11 @@
 const POOL = require("../../../configs/db/sql/connection");
 =======
 const POOL = require("../../../config/db/sql/connection");
+<<<<<<< HEAD
 >>>>>>> c3376cb (folder structure change)
+=======
+>>>>>>> 39c6849 (folder structure change)
+>>>>>>> 48d34ee (folder structure change)
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");

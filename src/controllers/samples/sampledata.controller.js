@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 const POOL = require("../../../configs/db/sql/connection");
-=======
-const POOL = require("../../../config/db/sql/connection");
->>>>>>> c3376cb (folder structure change)
 const { successMsgRetrieve } = require("../../../utils/commonSyntaxes");
 
 exports.getSampleRecord = async (webReq, webRes) => {
@@ -18,7 +14,7 @@ exports.getEmployees = async (request, response) => {
 exports.getEmployeeById = async (request, response) => {
   let empId = request?.params?.id;
   let res = await POOL.query(
-    `SELECT * FROM public.employee where employeeid = ${empId}`
+    `SELECT * FROM public.employee where employeeid = ${empId}`,
   );
   response?.send(res?.rows[0]);
 };
@@ -36,6 +32,6 @@ exports.insertEmployee = async (req, res) => {
       } else {
         res.send("inserted.");
       }
-    }
+    },
   );
 };
