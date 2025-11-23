@@ -1,7 +1,5 @@
-const POOL = require("../../db/sql/connection");
-const { getClientIp } = require("../../utils/commonFunctions");
-const { successMsgRetrieve } = require("../../utils/commonSyntaxes");
-// const { POOL } = require("../../db/dbConfig");
+const POOL = require("../../../config/db/sql/connection");
+const { getClientIp } = require("../../../utils/commonFunctions");
 
 exports.getMyspacePortfolioDetails = async (req, res) => {
   console.log("In getMyspacePortfolioDetails");

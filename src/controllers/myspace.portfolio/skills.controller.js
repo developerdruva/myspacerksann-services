@@ -1,5 +1,4 @@
-const POOL = require("../../db/sql/connection");
-
+const POOL = require("../../../config/db/sql/connection");
 // Add skill detail
 exports.addSkillDetail = (req, res) => {
   const body = req.body;
