@@ -1,4 +1,4 @@
-const POOL = require("../../../config/db/sql/connection");
+const POOL = require("../../../configs/db/sql/connection");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");

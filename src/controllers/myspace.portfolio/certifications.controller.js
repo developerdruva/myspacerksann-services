@@ -1,4 +1,4 @@
-const POOL = require("../../../config/db/sql/connection");
+const POOL = require("../../../configs/db/sql/connection");
 
 // Add certification
 exports.addCertification = (req, res) => {

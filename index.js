@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const DB = require("./config/db/mongo/mongoConnection");
+const DB = require("./configs/db/mongo/mongoConnection");
 dotenv.config();
 
 // DB.connectToDB();
