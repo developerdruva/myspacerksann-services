@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const DB = require("./configs/db/mongo/mongoConnection");
+const DB = require("./config/configs/db/mongo/mongoConnection");
 dotenv.config();
 
 // DB.connectToDB();
@@ -8,10 +8,10 @@ const PORT = process.env.PORT || 8080;
 
 const cors = require("cors");
 
-const MyspaceRoutes = require("./src/routes/myspace.routes");
-const SampleDataRoutes = require("./src/routes/sample.data.routes");
-const UserAccountRoutes = require("./src/routes/account.user.routes");
-// const todoListRoutes = require('./src/routes/todolist.user.routes');
+const MyspaceRoutes = require("./src/src/routes/myspace.routes");
+const SampleDataRoutes = require("./src/src/routes/sample.data.routes");
+const UserAccountRoutes = require("./src/src/routes/account.user.routes");
+// const todoListRoutes = require('./src/src/routes/todolist.user.routes');
 const corsOptions = require("./utils/corsOptions");
 const particularsRoutes = require("./routes/particulars/paticulars.routes");
 const paymentRoutes = require("./routes/particulars//payments.routes");
@@ -62,11 +62,6 @@ app.use((req, res, next) => {
   console.log(timestamp + " - " + req.headers?.origin);
   next();
 });
-app.use((req, res, next) => {
-  const timestamp = new Date();
-  console.log(timestamp + " - " + req.headers?.origin);
-  next();
-});
 
 app.get("/", (webReq, webRes) => {
   //   console.log("welcome this is myspace rksann application running.");
@@ -83,8 +78,8 @@ app.get("/sampleroute", (webReq, webRes) => {
   });
 });
 app.use(MyspaceRoutes);
-app.use(SampleDataRoutes);
-app.use(UserAccountRoutes);
+// app.use(SampleDataRoutes);
+// app.use(UserAccountRoutes);
 app.use("/api/particulars", particularsRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/document-particulars", documentParticularsRoutes);

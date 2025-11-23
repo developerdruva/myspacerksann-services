@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const POOL = require("../../../configs/db/sql/connection");
+=======
+const POOL = require("../../../config/db/sql/connection");
+>>>>>>> c3376cb (folder structure change)
 const { successMsgRetrieve } = require("../../../utils/commonSyntaxes");
 
 exports.getSampleRecord = async (webReq, webRes) => {

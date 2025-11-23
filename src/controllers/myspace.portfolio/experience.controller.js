@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const POOL = require("../../../configs/db/sql/connection");
+=======
+const POOL = require("../../../config/db/sql/connection");
+>>>>>>> c3376cb (folder structure change)
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
