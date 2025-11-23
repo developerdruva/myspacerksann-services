@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const DB = require("./db/mongo/mongoConnection");
+const DB = require("./config/db/mongo/mongoConnection");
 dotenv.config();
 
 // DB.connectToDB();
@@ -8,10 +8,10 @@ const PORT = process.env.PORT || 8080;
 
 const cors = require("cors");
 
-const MyspaceRoutes = require("./routes/myspace.routes");
-const SampleDataRoutes = require("./routes/sample.data.routes");
-const UserAccountRoutes = require("./routes/account.user.routes");
-// const todoListRoutes = require('./routes/todolist.user.routes');
+const MyspaceRoutes = require("./src/routes/myspace.routes");
+const SampleDataRoutes = require("./src/routes/sample.data.routes");
+const UserAccountRoutes = require("./src/routes/account.user.routes");
+// const todoListRoutes = require('./src/routes/todolist.user.routes');
 const corsOptions = require("./utils/corsOptions");
 const particularsRoutes = require("./routes/particulars/paticulars.routes");
 const paymentRoutes = require("./routes/particulars//payments.routes");
@@ -57,6 +57,11 @@ const authLimiter = rateLimit({
 app.use(express.json());
 app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions)); // Enable pre-flight requests for all routes
+app.use((req, res, next) => {
+  const timestamp = new Date();
+  console.log(timestamp + " - " + req.headers?.origin);
+  next();
+});
 morgan.token("origin", (req) => req.headers.origin || "-");
 app.use(
   morgan(
