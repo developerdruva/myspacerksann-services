@@ -1,4 +1,4 @@
-const POOL = require("../../../config/db/sql/connection");
+const POOL = require("../../../configs/db/sql/connection");
 const { successMsgRetrieve } = require("../../../utils/commonSyntaxes");
 
 exports.getSampleRecord = async (webReq, webRes) => {

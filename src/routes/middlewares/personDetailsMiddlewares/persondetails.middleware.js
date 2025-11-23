@@ -1,7 +1,5 @@
-const {
-  awsClientS3,
-  dateTimeString,
-} = require("../../../../utils/commonFunctions");
+const { dateTimeString } = require("../../../../utils/commonFunctions");
+const { awsClientS3 } = require("../../../../configs/cloud/aws-configs");
 
 exports.uploadS3bucketMiddleware = () => {
   var multer = require("multer");
