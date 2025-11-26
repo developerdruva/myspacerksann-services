@@ -139,15 +139,10 @@ exports.loginSimple = (req, res) => {
   );
 };
 
-exports.saveProfileDetails = (req, res) => {
-  // console.log('hi in save profile function req -> ', req);
+exports.saveProfileDetails = async (req, res) => {
+  console.log("hi in save profile function req -> ", req?.body);
   const body = req?.body;
-  console.log(
-    "body -> , -r0",
-    Object.keys(body).slice(1),
-    req?.files["profile_pic"]
-  );
-  let updateData = {};
+
   const keysAllowed = [
     "first_name",
     "last_name",
@@ -159,62 +154,71 @@ exports.saveProfileDetails = (req, res) => {
     "welcome_text",
     "person_designation",
   ];
-  let reqKeys = Object.keys(body);
-  keysAllowed.forEach((item) => {
-    if (reqKeys.includes(item)) {
-      updateData[item] = body[item];
-    }
-  });
-  if (req?.files["profile_pic"] && req?.files["profile_pic"].length > 0) {
-    updateData["profile_pic"] = req?.files["profile_pic"][0]["location"];
-  }
-  if (req?.files["resume"] && req?.files["resume"].length > 0) {
-    updateData["resume"] = req?.files["resume"][0]["location"];
-  }
-  let x = Object.keys(updateData);
-  const updateSQLQuery = x.reduce((preVal, currVal, index) => {
-    return (
-      preVal +
-      `${currVal}='${updateData[currVal]}'` +
-      (index != x.length - 1 ? "," : "")
-    );
-  }, "");
 
-  // let userKeys = Object.keys(body).slice(1,);
-  // let userData = [];
-  // userKeys.forEach(item => {
-  //     userData.push(req?.body[item])
-  // })
-  // userKeys.push('profile_pic');
-  // userKeys.push('resume');
-  // userData.push(req?.files['profile_pic'][0]['location'])
-  // userData.push(req?.files['resume'][0]['location'])
-  // console.log(userData)
-  // console.log(userKeys)
+  // Filter fields
+  let updateData = {};
+  for (let key of keysAllowed) {
+    if (body[key] !== undefined) {
+      updateData[key] = body[key];
+    }
+  }
+
+  // Files
+  if (req?.files?.profile_pic?.length > 0) {
+    updateData["profile_pic"] = req.files.profile_pic[0].location;
+  }
+
+  if (req?.files?.resume?.length > 0) {
+    updateData["resume"] = req.files.resume[0].location;
+  }
+
+  const fields = Object.keys(updateData);
+  if (fields.length === 0) {
+    return res.status(400).send({ message: "No valid fields to update." });
+  }
+
+  // Build SET clause safely: field=$1, field=$2...
+  const setClause = fields.map((field, i) => `${field} = $${i + 1}`).join(", ");
+
+  const values = fields.map((f) => updateData[f]);
 
   try {
-    let updateQuery = `update portfolioblog.person_details set 
-            ${updateSQLQuery}
-                where sl_no=${body?.sl_no}
-             `;
-    console.log(" query", updateQuery);
-    POOL.query(updateQuery, (err, result) => {
-      console.log("result", result);
-      console.log("err-", err);
-      if (err) {
-        res.send(err?.message);
-      } else {
-        res.send({
-          status: "success",
-          message: "User registered successfully.",
-        });
-      }
+    const query = `
+      UPDATE portfolioblog.person_details
+      SET ${setClause}
+      WHERE sl_no = $${fields.length + 1}
+      RETURNING *;
+    `;
+
+    values.push(body.sl_no);
+
+    console.log("Final Query:", query);
+    console.log("Values:", values);
+
+    const result = await POOL.query(query, values);
+
+    return res.send({
+      status: "success",
+      message: "User updated successfully.",
+      data: result.rows[0],
     });
-  } catch (e) {
-    res.send(e);
-    console.log("e ", e);
+  } catch (err) {
+    console.log("Error:", err);
+    return res.status(500).send({ error: err.message });
   }
 };
+
+// let userKeys = Object.keys(body).slice(1,);
+// let userData = [];
+// userKeys.forEach(item => {
+//     userData.push(req?.body[item])
+// })
+// userKeys.push('profile_pic');
+// userKeys.push('resume');
+// userData.push(req?.files['profile_pic'][0]['location'])
+// userData.push(req?.files['resume'][0]['location'])
+// console.log(userData)
+// console.log(userKeys)
 
 {
   /**

@@ -2,7 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const DB = require("./configs/db/mongo/mongoConnection");
 dotenv.config();
-
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
 // DB.connectToDB();
 const PORT = process.env.PORT || 8080;
 
@@ -41,7 +42,7 @@ app.get("/sampleroute", (webReq, webRes) => {
 });
 app.use(MyspaceRoutes);
 // app.use(SampleDataRoutes);
-// app.use(UserAccountRoutes);
+app.use(UserAccountRoutes);
 
 app.listen(PORT, () => {
   console.clear();

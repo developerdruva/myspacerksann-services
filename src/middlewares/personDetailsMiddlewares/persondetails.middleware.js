@@ -1,7 +1,8 @@
-const { dateTimeString } = require("../../../../utils/commonFunctions");
-const { awsClientS3 } = require("../../../../configs/cloud/aws-configs");
+const { dateTimeString } = require("../../../utils/commonFunctions");
+const { awsClientS3 } = require("../../../configs/cloud/aws-configs");
 
 exports.uploadS3bucketMiddleware = () => {
+  console.log("hi in upload middleware ");
   var multer = require("multer");
   var multerS3 = require("multer-s3");
   // const { dateTimeString, awsClientS3 } = require('../utils/commonFunctions');
