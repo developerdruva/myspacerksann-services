@@ -21,6 +21,9 @@ exports.saveWorkedCompanies = (webReq, webRes) => {
     "color_code",
     "comp_seq",
     "company_code",
+
+    "o_from",
+    "o_to",
     "created_ip",
   ];
   // const updateSQLQuery = keysAllowed.reduce((preVal, currVal, index) => {
@@ -28,7 +31,7 @@ exports.saveWorkedCompanies = (webReq, webRes) => {
   // }, '')
   // console.log('update querys => ', updateSQLQuery)
   try {
-    let sqlQuery = `insert into portfolioblog.worked_companies (${keysAllowed}) values ($1, $2,$3,$4,$5,$6,$7,$8,$9,$10)`;
+    let sqlQuery = `insert into portfolioblog.worked_companies (${keysAllowed}) values ($1, $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`;
     console.log(" query", keysAllowed);
     console.log(" query values ", Object.values(body));
 
@@ -94,6 +97,8 @@ exports.updateWorkCompanyRecord = (webReq, webRes) => {
     "color_code",
     "comp_seq",
     "company_code",
+    "o_from",
+    "o_to",
   ];
   let reqKeys = Object.keys(body);
   keysAllowed.forEach((item) => {
@@ -135,6 +140,7 @@ exports.updateWorkCompanyRecord = (webReq, webRes) => {
 exports.saveWorkedProject = (webReq, webRes) => {
   const body = webReq?.body;
   body["created_ip"] = webReq?.socket.remoteAddress;
+  console.log(" body of req", body);
   const keysAllowed = [
     "company_name",
     "project_name",
@@ -158,6 +164,7 @@ exports.saveWorkedProject = (webReq, webRes) => {
     let sqlQuery = `insert into portfolioblog.worked_projects (${keysAllowed.join(
       ","
     )}) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)`;
+    console.log(sqlQuery);
     POOL.query(
       sqlQuery,
       keysAllowed.map((key) => body[key]),
@@ -181,6 +188,7 @@ exports.saveWorkedProject = (webReq, webRes) => {
 exports.updateWorkedProject = (webReq, webRes) => {
   const body = webReq?.body;
   const id = webReq?.params?.id;
+  console.log(" res body ", body);
   const keysAllowed = [
     "company_name",
     "project_name",
@@ -198,6 +206,8 @@ exports.updateWorkedProject = (webReq, webRes) => {
     "tech_stack",
     "display_no",
     "project_type",
+    "o_from",
+    "o_to",
   ];
   let updateData = {};
   let reqKeys = Object.keys(body);
@@ -222,6 +232,7 @@ exports.updateWorkedProject = (webReq, webRes) => {
   }, "");
   try {
     let updateQuery = `update portfolioblog.worked_projects set ${updateSQLQuery} where sl_no=${id}`;
+    console.log(" update ", updateQuery);
     POOL.query(updateQuery, (err, result) => {
       if (err) {
         webRes.send(err?.message);
