@@ -57,6 +57,11 @@ const authLimiter = rateLimit({
 app.use(express.json());
 app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions)); // Enable pre-flight requests for all routes
+app.use((req, res, next) => {
+  const timestamp = new Date();
+  console.log(timestamp + " - " + req.headers?.origin);
+  next();
+});
 morgan.token("origin", (req) => req.headers.origin || "-");
 app.use(
   morgan(
