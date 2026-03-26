@@ -13,9 +13,9 @@ const SampleDataRoutes = require("./src/routes/sample.data.routes");
 const UserAccountRoutes = require("./src/routes/account.user.routes");
 // const todoListRoutes = require('./src/routes/todolist.user.routes');
 const corsOptions = require("./utils/corsOptions");
-const particularsRoutes = require("./routes/paticulars.routes");
-const paymentRoutes = require("./routes/payments.routes");
-const dashboardRoutes = require("./routes/partdashboard.routes");
+const particularsRoutes = require("./routes/particulars/paticulars.routes");
+const paymentRoutes = require("./routes/particulars//payments.routes");
+const dashboardRoutes = require("./routes/particulars//partdashboard.routes");
 const documentParticularsRoutes = require("./routes/documentparticulars.routes");
 
 const app = express();
