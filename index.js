@@ -13,17 +13,21 @@ const SampleDataRoutes = require("./routes/sample.data.routes");
 const UserAccountRoutes = require("./routes/account.user.routes");
 // const todoListRoutes = require('./routes/todolist.user.routes');
 const corsOptions = require("./utils/corsOptions");
+const particularsRoutes = require("./routes/paticulars.routes");
+const paymentRoutes = require("./routes/payments.routes");
+const dashboardRoutes = require("./routes/partdashboard.routes");
+const documentParticularsRoutes = require("./routes/documentparticulars.routes");
 
 const app = express();
 
 app.use(express.json());
 app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions)); // Enable pre-flight requests for all routes
-app.use((req, res, next )=> {
+app.use((req, res, next) => {
   const timestamp = new Date();
-  console.log(timestamp + " - "+ req.headers?.origin)
-  next()
-})
+  console.log(timestamp + " - " + req.headers?.origin);
+  next();
+});
 
 app.get("/", (webReq, webRes) => {
   //   console.log("welcome this is myspace rksann application running.");
@@ -42,12 +46,16 @@ app.get("/sampleroute", (webReq, webRes) => {
 app.use(MyspaceRoutes);
 app.use(SampleDataRoutes);
 app.use(UserAccountRoutes);
+app.use("/api/particulars", particularsRoutes);
+app.use("/api/payments", paymentRoutes);
+app.use("/api/document-particulars", documentParticularsRoutes);
 
+app.use("/api/partdashboard", dashboardRoutes);
 app.listen(PORT, () => {
   console.clear();
   console.log();
   console.log(
-    "------------------------------ new run -------------------------------"
+    "------------------------------ new run -------------------------------",
   );
   console.log(`server running on ${PORT}`);
 });
