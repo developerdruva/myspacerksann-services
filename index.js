@@ -62,6 +62,11 @@ app.use((req, res, next) => {
   console.log(timestamp + " - " + req.headers?.origin);
   next();
 });
+app.use((req, res, next) => {
+  const timestamp = new Date();
+  console.log(timestamp + " - " + req.headers?.origin);
+  next();
+});
 
 app.get("/", (webReq, webRes) => {
   //   console.log("welcome this is myspace rksann application running.");
