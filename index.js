@@ -17,6 +17,9 @@ const particularsRoutes = require("./routes/particulars/paticulars.routes");
 const paymentRoutes = require("./routes/particulars//payments.routes");
 const dashboardRoutes = require("./routes/particulars//partdashboard.routes");
 const documentParticularsRoutes = require("./routes/documentparticulars.routes");
+const incomeRoutes = require("./routes/monthly-spends/income.routes");
+const analyzerRoutes = require("./routes/monthly-spends/analyzer.routes");
+const expensesRoutes = require("./routes/monthly-spends/expenses.routes");
 
 const app = express();
 
@@ -49,6 +52,9 @@ app.use(UserAccountRoutes);
 app.use("/api/particulars", particularsRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/document-particulars", documentParticularsRoutes);
+app.use("/api/monthly-spends/income", incomeRoutes);
+app.use("/api/monthly-spends/analyzer", analyzerRoutes);
+app.use("/api/monthly-spends/expenses", expensesRoutes);
 
 app.use("/api/partdashboard", dashboardRoutes);
 app.listen(PORT, () => {
