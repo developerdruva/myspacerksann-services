@@ -86,7 +86,6 @@ app.get("/sampleroute", (webReq, webRes) => {
 app.use(MyspaceRoutes);
 app.use(SampleDataRoutes);
 app.use(UserAccountRoutes);
-app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/particulars", particularsRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/document-particulars", documentParticularsRoutes);

@@ -1,12 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/mylogr.particulars/document.particulars.controller");
-const {
-  authMiddleware,
-  allowRoles,
-} = require("./middlewares/authMiddlewares/auth.middleware");
-
-router.use(authMiddleware);
 
 router.post("/create-record", controller.addParticular);
 router.put("/update-record/:id", controller.updateParticular);
