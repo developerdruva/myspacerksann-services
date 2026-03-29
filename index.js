@@ -23,6 +23,35 @@ const expensesRoutes = require("./routes/monthly-spends/expenses.routes");
 const authRoutes = require("./routes/auth/auth.routes");
 
 const app = express();
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+
+app.use(helmet());
+
+// Global rate limiter — 100 requests per 15 min per IP across all routes
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 50,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: "error",
+    message: "Too many requests, please try again later",
+  },
+});
+app.use(globalLimiter);
+
+// Stricter limiter for auth routes — 20 requests per 15 min
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: "error",
+    message: "Too many auth attempts, please try again later",
+  },
+});
 
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -50,7 +79,7 @@ app.get("/sampleroute", (webReq, webRes) => {
 app.use(MyspaceRoutes);
 app.use(SampleDataRoutes);
 app.use(UserAccountRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/particulars", particularsRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/document-particulars", documentParticularsRoutes);
