@@ -20,6 +20,7 @@ const documentParticularsRoutes = require("./routes/documentparticulars.routes")
 const incomeRoutes = require("./routes/monthly-spends/income.routes");
 const analyzerRoutes = require("./routes/monthly-spends/analyzer.routes");
 const expensesRoutes = require("./routes/monthly-spends/expenses.routes");
+const authRoutes = require("./routes/auth/auth.routes");
 
 const app = express();
 
@@ -49,6 +50,7 @@ app.get("/sampleroute", (webReq, webRes) => {
 app.use(MyspaceRoutes);
 app.use(SampleDataRoutes);
 app.use(UserAccountRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/particulars", particularsRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/document-particulars", documentParticularsRoutes);
