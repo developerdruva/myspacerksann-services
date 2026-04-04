@@ -93,6 +93,8 @@ exports.getExpenseById = async (req, res) => {
 
 // UPDATE
 exports.updateExpense = async (req, res) => {
+  console.log("Updating expense with ID:", req.params.id);
+  console.log("Request body:", req.body);
   try {
     const { id } = req.params;
 
@@ -131,13 +133,14 @@ exports.updateExpense = async (req, res) => {
         id,
       ],
     );
-
+    console.log("Update result:", result);
     if (result.rowCount === 0) {
       return res.status(404).json({ error: "Expense not found" });
     }
 
     res.json(result.rows[0]);
   } catch (err) {
+    console.error("Error updating expense:", err);
     res.status(500).json({ error: "Failed to update expense" });
   }
 };
@@ -173,7 +176,7 @@ exports.restoreExpense = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const result = await pool.query(
+    const result = await POOL.query(
       `UPDATE monthly_expenses.expenses
        SET is_deleted = FALSE,
            deleted_at = NULL,
