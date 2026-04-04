@@ -122,6 +122,7 @@ exports.login = async (req, res) => {
 };
 
 // POST /api/auth/sso-token
+// POST /api/auth/sso-token
 exports.ssoToken = async (req, res) => {
   const { email } = req.body;
 
@@ -133,27 +134,22 @@ exports.ssoToken = async (req, res) => {
 
   try {
     // 1. Check if user exists
-    const existing = await POOL.query(
+    let result = await POOL.query(
       "SELECT * FROM authentication.user_accounts WHERE email = $1",
       [email],
     );
 
-    let user = existing.rows[0];
+    let user = result.rows[0];
 
     // 2. Auto-create user if not found
     if (!user) {
-      //   const inserted = await POOL.query(
-      //     `INSERT INTO authentication.user_accounts (email, role, created_at)
-      //      VALUES ($1, $2, NOW())
-      //      RETURNING *`,
-      //     [email, "user"],
-      //   );
-      //   user = inserted.rows[0];
-      return res.json({
-        status: "FAILED",
-        message:
-          "User not found for the provided email. Please register/login first.",
-      });
+      const inserted = await POOL.query(
+        `INSERT INTO authentication.user_accounts (email, role, created_at)
+           VALUES ($1, $2, NOW())
+           RETURNING *`,
+        [email, "user"],
+      );
+      user = inserted.rows[0];
     }
 
     // 3. Generate token

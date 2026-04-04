@@ -62,12 +62,6 @@ app.use((req, res, next) => {
   console.log(timestamp + " - " + req.headers?.origin);
   next();
 });
-morgan.token("origin", (req) => req.headers.origin || "-");
-app.use(
-  morgan(
-    ':date[iso] :method :url :status :response-time ms origin=":origin" ip=:remote-addr',
-  ),
-);
 
 app.get("/", (webReq, webRes) => {
   //   console.log("welcome this is myspace rksann application running.");
