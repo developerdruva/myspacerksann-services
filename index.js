@@ -25,13 +25,14 @@ const authRoutes = require("./routes/auth/auth.routes");
 const app = express();
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+const morgan = require("morgan");
 
 app.use(helmet());
 
 // Global rate limiter — 100 requests per 15 min per IP across all routes
 const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 50,
+  max: 100,
   standardHeaders: true,
   legacyHeaders: false,
   message: {
@@ -56,11 +57,12 @@ const authLimiter = rateLimit({
 app.use(express.json());
 app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions)); // Enable pre-flight requests for all routes
-app.use((req, res, next) => {
-  const timestamp = new Date();
-  console.log(timestamp + " - " + req.headers?.origin);
-  next();
-});
+morgan.token("origin", (req) => req.headers.origin || "-");
+app.use(
+  morgan(
+    ':date[iso] :method :url :status :response-time ms origin=":origin" ip=:remote-addr',
+  ),
+);
 
 app.get("/", (webReq, webRes) => {
   //   console.log("welcome this is myspace rksann application running.");

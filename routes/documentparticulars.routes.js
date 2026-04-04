@@ -3,6 +3,7 @@ const router = express.Router();
 const controller = require("../controllers/mylogr.particulars/document.particulars.controller");
 const {
   authMiddleware,
+  allowRoles,
 } = require("./middlewares/authMiddlewares/auth.middleware");
 
 router.use(authMiddleware);
@@ -10,7 +11,7 @@ router.use(authMiddleware);
 router.post("/create-record", controller.addParticular);
 router.put("/update-record/:id", controller.updateParticular);
 router.delete("/delete/:id", controller.deleteParticular);
-router.put("/restore/:id", controller.restoreParticular);
+router.put("/restore/:id", allowRoles("admin"), controller.restoreParticular);
 router.get("/", controller.getParticulars);
 router.get("/deleted", controller.getDeletedParticulars);
 router.get("/:id", controller.getParticularById);
